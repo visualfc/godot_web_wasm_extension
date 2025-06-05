@@ -2,7 +2,6 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd $SCRIPT_DIR
 
-./buildcpp.sh
 # Check if port is provided as a command line argument
 if [ -z "$1" ]
 then
