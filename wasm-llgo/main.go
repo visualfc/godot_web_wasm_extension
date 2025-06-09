@@ -3,6 +3,8 @@ package main
 import (
 	"unsafe"
 
+	"math"
+
 	"github.com/goplus/gdext/gdext"
 	"github.com/goplus/lib/c"
 )
@@ -58,6 +60,14 @@ func summator_library_init(p_get_proc_address gdext.InterfaceGetProcAddress,
 	r_initialization.MinimumInitializationLevel = gdext.INITIALIZATION_SCENE
 	r_initialization.Initialize = initialize
 	r_initialization.Deinitialize = uninitialize
+
+	fn := p_get_proc_address(c.Str("get_godot_version"))
+	getVersion := *(*gdext.InterfaceGetGodotVersion)(unsafe.Pointer(&fn))
+	var ver gdext.GodotVersion
+	getVersion(&ver)
+	c.Printf(c.Str("Godot %d.%d.%d\n"), ver.Major, ver.Minor, ver.Patch)
+	println("Godot:", c.GoString(ver.String))
+	println("Math:", math.Sqrt(100))
 	return 1
 }
 
